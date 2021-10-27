@@ -1,5 +1,5 @@
 ﻿#include <iostream>
-
+#include<math.h>
 using namespace std;
 void Enter_Arr(int* Mass, int size) {
 	for (int i = 0; i < size; i++) {
@@ -50,10 +50,45 @@ void Enter_Out_RepArr(int* ArrRep, int size_Repnum) {
 	if (save_sum_rep <= sum_rep) save_sum_rep = sum_rep;
 		
 	}
-	cout << "Длинна наибольшей последовательности равна: " << save_sum_rep;
+	cout << "Длинна наибольшей последовательности равна: " << save_sum_rep << endl;
 }
+void Enter_find_distPoints(int** Coor_Points, int volum_points) {
+	for (int i = 0; i < volum_points; i++) {
+		for (int j = 0; j < 2; j++) {
+			Coor_Points[i][j] = -5 + rand() % 15;
+		}
+	}
+	bool Check_X = false, Check_Y = false;
+	double dist_Points, dist_save_Points = -1;
+	int delX, delY;
+	for (int i = 0; i < volum_points; i++) {
+		for (int k = 1; k < volum_points; k++) {
+			for (int j = 0; j < 2; j++) {
+				if (j == 0) { 
+				delX = 0;
+				delX = Coor_Points[i][j] - Coor_Points[k][j]; 
+				Check_X = true;
+				} 
+				if (j == 1) {
+					delY = 0;
+					delY = Coor_Points[i][j] - Coor_Points[k][j];
+					Check_Y = true;
+				}
+				if (Check_Y == true && Check_X == true) {
+					dist_Points = sqrt(pow(delX, 2) + pow(delY, 2));
+					if (dist_save_Points < dist_Points) dist_save_Points = dist_Points;
+				}
+				
+			}
+		}
+	}
+
+	cout << "Наибольшее расстояние между точками равно: " << dist_save_Points;
+}
+
 int main() {
 	setlocale(LC_ALL, "rus");
+
 	int size;
 	cout << "Введите размер массива: "; cin >> size;
 	int* Arr = new int[size];
@@ -71,5 +106,12 @@ int main() {
 		int* RepArrNum = new int[size_Repnum];
 		Enter_Out_RepArr(RepArrNum, size_Repnum);
 
+		int volum_points;
+		cout << "Введите количество точек: "; cin >> volum_points;
+		int** Coor_points = new int* [volum_points];
+		for (int i = 0; i < volum_points; i++) {
+			Coor_points[i] = new int[2];
+		}
+		Enter_find_distPoints(Coor_points, volum_points);
 	return 0;
 }
