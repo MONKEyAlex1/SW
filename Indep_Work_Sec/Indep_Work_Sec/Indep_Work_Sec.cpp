@@ -10,7 +10,7 @@ void Find_Pos(int* Array, int size, int num_arr) {
 	int Pos_num = -1;
 	for (int i = 0; i < size; i++) {
 		if (Array[i] == num_arr) {
-			Pos_num = i;;
+			Pos_num = i;
 			break;
 		}
 	}
