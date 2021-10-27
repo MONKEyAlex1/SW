@@ -32,7 +32,26 @@ void Enter_Out_MinThen(int* ArrMinThen, int size_MinThen) {
 	}
 	cout << endl;
 }
+void Enter_Out_RepArr(int* ArrRep, int size_Repnum) {
+	cout << "Введите значения для массива: " << endl;
 
+	for (int i = 0; i < size_Repnum; i++) {
+		cin >> ArrRep[i];
+	}
+	int save_sum_rep = 2, sum_rep = 1;
+	for (int i = 1; i < size_Repnum; i++) {
+		if (ArrRep[i] != ArrRep[i - 1]) {
+			sum_rep = 1; }
+			if (ArrRep[i] == ArrRep[i - 1]) {
+				sum_rep++;
+				
+			}
+
+	if (save_sum_rep <= sum_rep) save_sum_rep = sum_rep;
+		
+	}
+	cout << "Длинна наибольшей последовательности равна: " << save_sum_rep;
+}
 int main() {
 	setlocale(LC_ALL, "rus");
 	int size;
@@ -47,6 +66,10 @@ int main() {
 		int* num_MinThen_Arr = new int[size_MinThen];
 		Enter_Out_MinThen(num_MinThen_Arr, size_MinThen);
 
+		int size_Repnum;
+		cout << "Введите размер массива: "; cin >> size_Repnum;
+		int* RepArrNum = new int[size_Repnum];
+		Enter_Out_RepArr(RepArrNum, size_Repnum);
 
 	return 0;
 }
